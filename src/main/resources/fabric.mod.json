@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "seedfix",
+  "version": "${version}",
+  "name": "Seed Fix",
+  "description": "Allows worldgen datapacks to use the world seed as they should be able to, instead of being required to hardcode a seed",
+  "authors": [
+    "Justsnoopy30"
+  ],
+  "contact": {
+    "sources": "https://github.com/HyperCubeMC/Seedfix",
+    "issues": "https://github.com/HyperCubeMC/Seedfix/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/seedfix/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.hypercubemc.seedfix.SeedFix"
+    ]
+  },
+  "mixins": [
+    "seedfix.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.12.5",
+    "minecraft": ">=1.18-beta.5"
+  }
+}

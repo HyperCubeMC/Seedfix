@@ -23,7 +23,7 @@
     "seedfix.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.12.5",
-    "minecraft": ">=1.18-beta.5"
+    "fabricloader": ">=0.12.7",
+    "minecraft": "1.18.x"
   }
 }

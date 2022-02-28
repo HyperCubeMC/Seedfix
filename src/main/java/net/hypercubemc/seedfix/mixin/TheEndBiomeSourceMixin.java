@@ -2,9 +2,9 @@ package net.hypercubemc.seedfix.mixin;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.hypercubemc.seedfix.SeedFix;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.RegistryLookupCodec;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.TheEndBiomeSource;
@@ -31,15 +31,15 @@ public abstract class TheEndBiomeSourceMixin extends BiomeSource {
         return generationSeed;
     }
 
-    protected TheEndBiomeSourceMixin(List<Biome> list) {
+    protected TheEndBiomeSourceMixin(List<Holder<Biome>> list) {
         super(list);
     }
 
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void seedfix$clinit(CallbackInfo ci) {
         CODEC = RecordCodecBuilder.create((instance) -> {
-            return instance.group(RegistryLookupCodec.create(Registry.BIOME_REGISTRY).forGetter((theEndBiomeSource) -> {
-                return ((TheEndBiomeSourceAccessor) theEndBiomeSource).getBiomes();
+            return instance.group(RegistryOps.retrieveRegistry(Registry.BIOME_REGISTRY).forGetter((theEndBiomeSource) -> {
+                return null;
             }), Codec.LONG.fieldOf("seed").orElseGet(TheEndBiomeSourceMixin::getGenerationSeed).stable().forGetter((theEndBiomeSource) -> {
                 return ((TheEndBiomeSourceAccessor) theEndBiomeSource).getSeed();
             })).apply(instance, instance.stable(TheEndBiomeSource::new));
@@ -47,7 +47,7 @@ public abstract class TheEndBiomeSourceMixin extends BiomeSource {
     }
 
     @ModifyVariable(
-            method = "<init>(Lnet/minecraft/core/Registry;JLnet/minecraft/world/level/biome/Biome;Lnet/minecraft/world/level/biome/Biome;Lnet/minecraft/world/level/biome/Biome;Lnet/minecraft/world/level/biome/Biome;Lnet/minecraft/world/level/biome/Biome;)V",
+            method = "<init>(JLnet/minecraft/core/Holder;Lnet/minecraft/core/Holder;Lnet/minecraft/core/Holder;Lnet/minecraft/core/Holder;Lnet/minecraft/core/Holder;)V",
             at = @At("HEAD"),
             argsOnly = true
     )

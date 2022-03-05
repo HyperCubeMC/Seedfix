@@ -12,7 +12,6 @@
     "issues": "https://github.com/HyperCubeMC/Seedfix/issues"
   },
   "license": "MIT",
-  "icon": "assets/seedfix/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -24,6 +23,6 @@
   ],
   "depends": {
     "fabricloader": ">=0.12.7",
-    "minecraft": ">=1.18.2-rc.1"
+    "minecraft": ">=1.18.2"
   }
 }
